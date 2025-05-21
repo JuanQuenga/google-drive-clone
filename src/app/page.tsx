@@ -26,6 +26,7 @@ export default function GoogleDriveClone() {
       if (folder) {
         breadcrumbs.unshift(folder);
         currentId = folder.parent;
+        git;
       } else {
         break;
       }
@@ -117,6 +118,7 @@ export default function GoogleDriveClone() {
           </ul>
         </div>
       </div>
+      Juan Quenga
     </div>
   );
 }
