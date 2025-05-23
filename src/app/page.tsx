@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { File, mockFiles } from "../lib/mock-data";
+import { mockFiles } from "../lib/mock-data";
 import { Folder, FileIcon, Upload, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -97,7 +97,7 @@ export default function GoogleDriveClone() {
                       </button>
                     ) : (
                       <Link
-                        href={file.url || "#"}
+                        href={file.url ?? "#"}
                         className="flex items-center text-gray-100 hover:text-blue-400"
                       >
                         <FileIcon className="mr-3" size={20} />
@@ -117,6 +117,7 @@ export default function GoogleDriveClone() {
           </ul>
         </div>
       </div>
+      Juan Quenga
     </div>
   );
 }
