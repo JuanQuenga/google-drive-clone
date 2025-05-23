@@ -26,7 +26,6 @@ export default function GoogleDriveClone() {
       if (folder) {
         breadcrumbs.unshift(folder);
         currentId = folder.parent;
-        git;
       } else {
         break;
       }
