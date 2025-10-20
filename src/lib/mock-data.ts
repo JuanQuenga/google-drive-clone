@@ -21,6 +21,7 @@ export const mockFolders: Folder[] = [
   { id: "3", name: "Work", type: "folder", parent: "root" },
   { id: "4", name: "Presentations", type: "folder", parent: "3" },
 ];
+
 export const mockFiles: File[] = [
   {
     id: "1",
