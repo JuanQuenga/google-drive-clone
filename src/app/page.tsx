@@ -3,7 +3,7 @@ import {
   files as filesSchema,
   folders as foldersSchema,
 } from "~/server/db/schema";
-import DriveContents from "./drive-contents";
+import DriveContents from "./DriveContents";
 
 export default async function GoogleDriveClone() {
   const files = await db.select().from(filesSchema);
