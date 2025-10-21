@@ -25,20 +25,17 @@ export default function DriveContents(props: {
             <Link href="/f/1" className="mr-2 text-gray-300 hover:text-white">
               My Drive
             </Link>
-            {parents
-              .slice()
-              .reverse()
-              .map((folder, index) => (
-                <div key={folder.id} className="flex items-center">
-                  <ChevronRight className="mx-2 text-gray-500" size={16} />
-                  <Link
-                    href={`/f/${folder.id}`}
-                    className="text-gray-300 hover:text-white"
-                  >
-                    {folder.name}
-                  </Link>
-                </div>
-              ))}
+            {parents.map((folder, index) => (
+              <div key={folder.id} className="flex items-center">
+                <ChevronRight className="mx-2 text-gray-500" size={16} />
+                <Link
+                  href={`/f/${folder.id}`}
+                  className="text-gray-300 hover:text-white"
+                >
+                  {folder.name}
+                </Link>
+              </div>
+            ))}
           </div>
           <Button
             onClick={handleUpload}
