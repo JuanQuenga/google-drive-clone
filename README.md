@@ -4,16 +4,19 @@
 
 - [x] Set up database and data model
 - [x] Move folder open state to URL
-- [ ] Add auth
+- [x] Add auth
 - [ ] Add file uploading
 - [ ] Add analytics
 
-## 10-20-2016
+## 10-20-2026
 
 - [x] Change folders to link components, remove all client state
 - [x] Clean up the database and data fatching patterns
-- [ ] Real homepage
+- [x] Real homepage
 
-## Authentication
+## 10-21-2026 - Added Auth
 
-Gmail Prefix: +drive
+- [ ] Setup production envirionment for AuthKit via WorkOS dashboard
+- [ ] Update environment variables for Netlify deployment
+- [ ] Check CI
+- [ ] Added user/email check to auth flow
