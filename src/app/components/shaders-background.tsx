@@ -1,9 +1,9 @@
 "use client";
 
-import { SimplexNoise } from "@paper-design/shaders-react";
+import { GrainGradient, SimplexNoise } from "@paper-design/shaders-react";
 import { useEffect, useState } from "react";
 
-export function SimplexBackground() {
+export function ShadersBackground() {
   const [dimensions, setDimensions] = useState({ width: 1280, height: 720 });
 
   useEffect(() => {
@@ -27,14 +27,16 @@ export function SimplexBackground() {
 
   return (
     <div className="fixed inset-0 z-0 h-screen w-screen overflow-hidden">
-      <SimplexNoise
+      <GrainGradient
         width={dimensions.width}
         height={dimensions.height}
-        colors={["#1a1a1a", "#4a1a1a", "#1a1a4a", "#1a4a4a"]}
-        stepsPerColor={1}
-        softness={1}
-        speed={2}
-        scale={1.6}
+        colors={["#1e293b", "#f5f8ff", "#64748b"]}
+        colorBack="#0f1419"
+        softness={0}
+        intensity={0.2}
+        noise={1}
+        shape="truchet"
+        speed={1}
       />
     </div>
   );

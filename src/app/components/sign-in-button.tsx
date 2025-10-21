@@ -4,7 +4,7 @@
  * Example of a client component using the useAuth hook to get the current user session.
  */
 
-import { Button, Flex } from "@radix-ui/themes";
+import { Button } from "~/components/ui/button";
 import { useAuth } from "@workos-inc/authkit-nextjs/components";
 import { handleSignOutAction } from "../actions/signOut";
 
@@ -17,18 +17,16 @@ export function SignInButton({ large }: { large?: boolean }) {
 
   if (user) {
     return (
-      <Flex gap="3">
-        <form action={handleSignOutAction}>
-          <Button type="submit" size={large ? "3" : "2"}>
-            Sign Out
-          </Button>
-        </form>
-      </Flex>
+      <form action={handleSignOutAction}>
+        <Button type="submit" size={large ? "lg" : "default"}>
+          Sign Out
+        </Button>
+      </form>
     );
   }
 
   return (
-    <Button asChild size={large ? "3" : "2"}>
+    <Button asChild size={large ? "lg" : "default"}>
       <a href="/login">Sign In {large && "with AuthKit"}</a>
     </Button>
   );
