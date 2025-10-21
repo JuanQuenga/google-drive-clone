@@ -1,17 +1,26 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import { Upload, ChevronRight } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import { FileRow, FolderRow } from "./f/[folderId]/FileRow";
+import { FileRow, FolderRow } from "../f/[folderId]/file-row";
 import type { files_table, folders_table } from "~/server/db/schema";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
+import { useAuth } from "@workos-inc/authkit-nextjs/components";
+import { SignInButton } from "./sign-in-button";
 
 export default function DriveContents(props: {
   files: (typeof files_table.$inferSelect)[];
   folders: (typeof folders_table.$inferSelect)[];
   parents: (typeof folders_table.$inferSelect)[];
 }) {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   const { folders, files, parents } = props;
   const handleUpload = () => {
     alert("Upload functionality would be implemented here");
@@ -23,9 +32,9 @@ export default function DriveContents(props: {
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center">
             <Link href="/f/1" className="mr-2 text-gray-300 hover:text-white">
-              My Drive
+              {user?.firstName ? `${user?.firstName}` : "My Drive"}
             </Link>
-            {parents.map((folder, index) => (
+            {parents.map((folder) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
                 <Link
@@ -44,6 +53,8 @@ export default function DriveContents(props: {
             <Upload className="mr-2" size={20} />
             Upload
           </Button>
+
+          <SignInButton />
         </div>
         <div className="rounded-lg bg-gray-800 shadow-xl">
           <div className="border-b border-gray-700 px-6 py-4">

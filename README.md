@@ -11,5 +11,9 @@
 ## 10-20-2016
 
 - [x] Change folders to link components, remove all client state
-- [ ] Clean up the database and data fatching patterns
+- [x] Clean up the database and data fatching patterns
 - [ ] Real homepage
+
+## Authentication
+
+Gmail Prefix: +drive
