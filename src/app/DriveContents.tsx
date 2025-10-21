@@ -8,8 +8,8 @@ import type { files, folders } from "~/server/db/schema";
 import Link from "next/link";
 
 export default function DriveContents(props: {
-  folders: (typeof folders.$inferSelect)[];
   files: (typeof files.$inferSelect)[];
+  folders: (typeof folders.$inferSelect)[];
   parents: (typeof folders.$inferSelect)[];
 }) {
   const { folders, files, parents } = props;

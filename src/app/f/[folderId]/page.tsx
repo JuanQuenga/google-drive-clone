@@ -15,7 +15,7 @@ async function getAllParents(folderId: number) {
       .from(foldersSchema)
       .where(eq(foldersSchema.id, currentId));
 
-    if (folder.length === 0) {
+    if (!folder[0]) {
       throw new Error("Folder not found");
     }
 
