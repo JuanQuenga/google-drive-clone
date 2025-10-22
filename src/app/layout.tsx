@@ -19,12 +19,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`dark ${geist.variable}`}>
-      <body>
-        <AuthKitProvider>
+    <AuthKitProvider>
+      <html lang="en" className={`dark ${geist.variable}`}>
+        <body>
           <PostHogProvider>{children}</PostHogProvider>
-        </AuthKitProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </AuthKitProvider>
   );
 }
