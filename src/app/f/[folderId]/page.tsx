@@ -5,6 +5,10 @@ import { QUERIES } from "~/server/db/queries";
 export default async function FolderPage(props: {
   params: Promise<{ folderId: string }>;
 }) {
+  const { user } = await withAuth();
+  if (!user) {
+    return <div>Unauthorized</div>;
+  }
   const params = await props.params;
   const parsedFolderId = parseInt(params.folderId);
   if (isNaN(parsedFolderId)) {
@@ -17,5 +21,14 @@ export default async function FolderPage(props: {
     QUERIES.getAllParentsForFolder(parsedFolderId),
   ]);
 
-  return <DriveContents files={files} folders={folders} parents={parents} />;
+  return (
+    <DriveContents
+      files={files}
+      folders={folders}
+      parents={parents}
+      userInfo={{
+        firstName: user.firstName ?? "My Drive",
+      }}
+    />
+  );
 }

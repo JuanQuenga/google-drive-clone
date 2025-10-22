@@ -5,26 +5,19 @@ import { Button } from "~/components/ui/button";
 import { FileRow, FolderRow } from "../f/[folderId]/file-row";
 import type { files_table, folders_table } from "~/server/db/schema";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-
-import { useAuth } from "@workos-inc/authkit-nextjs/components";
 import { SignInButton } from "./sign-in-button";
+import { UploadButton } from "./uploadthing";
+import { useRouter } from "next/navigation";
 
 export default function DriveContents(props: {
   files: (typeof files_table.$inferSelect)[];
   folders: (typeof folders_table.$inferSelect)[];
   parents: (typeof folders_table.$inferSelect)[];
+  userInfo: { firstName: string };
 }) {
-  const { user, loading } = useAuth();
+  const { folders, files, parents, userInfo } = props;
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  const { folders, files, parents } = props;
-  const handleUpload = () => {
-    alert("Upload functionality would be implemented here");
-  };
+  const navigate = useRouter();
 
   return (
     <div className="min-h-screen bg-gray-900 p-8 text-gray-100">
@@ -32,7 +25,7 @@ export default function DriveContents(props: {
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center">
             <Link href="/f/1" className="mr-2 text-gray-300 hover:text-white">
-              {user?.firstName ? `${user?.firstName}` : "My Drive"}
+              {userInfo.firstName ?? "My Drive"}
             </Link>
             {parents.map((folder) => (
               <div key={folder.id} className="flex items-center">
@@ -46,13 +39,13 @@ export default function DriveContents(props: {
               </div>
             ))}
           </div>
-          <Button
-            onClick={handleUpload}
-            className="bg-blue-600 text-white hover:bg-blue-700"
-          >
-            <Upload className="mr-2" size={20} />
-            Upload
-          </Button>
+          <UploadButton
+            endpoint="imageUploader"
+            onClientUploadComplete={async () => {
+              console.log("Upload complete");
+              navigate.refresh();
+            }}
+          />
 
           <SignInButton />
         </div>

@@ -19,6 +19,7 @@ export const env = createEnv({
     WORKOS_CLIENT_ID: z.string(),
     WORKOS_API_KEY: z.string(),
     WORKOS_COOKIE_PASSWORD: z.string(),
+    UPLOADTHING_TOKEN: z.string(),
   },
 
   /**
@@ -49,6 +50,7 @@ export const env = createEnv({
     WORKOS_COOKIE_PASSWORD: process.env.WORKOS_COOKIE_PASSWORD,
     NEXT_PUBLIC_WORKOS_REDIRECT_URI:
       process.env.NEXT_PUBLIC_WORKOS_REDIRECT_URI,
+    UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

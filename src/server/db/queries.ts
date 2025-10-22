@@ -6,6 +6,7 @@ import {
   folders_table as foldersSchema,
 } from "~/server/db/schema";
 import { eq } from "drizzle-orm";
+
 export const QUERIES = {
   getAllParentsForFolder: async function (folderId: number) {
     const parents = [];
@@ -16,6 +17,7 @@ export const QUERIES = {
         .from(foldersSchema)
         .where(eq(foldersSchema.id, currentId));
 
+      // TODO: Handle when a user has no folders or root folder
       if (!folder[0]) {
         throw new Error("Folder not found");
       }
@@ -38,5 +40,25 @@ export const QUERIES = {
       .select()
       .from(filesSchema)
       .where(eq(filesSchema.parent, folderId));
+  },
+};
+
+export const MUTATIONS = {
+  createFile: async function (input: {
+    file: {
+      name: string;
+      size: number;
+      url: string;
+      parent: number;
+      createdAt: Date;
+    };
+    userId: number;
+  }) {
+    // if (!input.userId) throw new Error("Unauthorized");
+
+    return await db.insert(filesSchema).values({
+      ...input.file,
+      createdBy: input.userId,
+    });
   },
 };
