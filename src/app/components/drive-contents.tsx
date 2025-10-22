@@ -1,7 +1,6 @@
 "use client";
 
-import { Upload, ChevronRight } from "lucide-react";
-import { Button } from "~/components/ui/button";
+import { ChevronRight } from "lucide-react";
 import { FileRow, FolderRow } from "../f/[folderId]/file-row";
 import type { files_table, folders_table } from "~/server/db/schema";
 import Link from "next/link";
@@ -14,11 +13,10 @@ export default function DriveContents(props: {
   folders: (typeof folders_table.$inferSelect)[];
   parents: (typeof folders_table.$inferSelect)[];
   userInfo: { firstName: string };
+  currentFolderId: number;
 }) {
   const { folders, files, parents, userInfo } = props;
-
   const navigate = useRouter();
-
   return (
     <div className="min-h-screen bg-gray-900 p-8 text-gray-100">
       <div className="mx-auto max-w-6xl">
@@ -39,7 +37,13 @@ export default function DriveContents(props: {
               </div>
             ))}
           </div>
-          <UploadButton endpoint="imageUploader" />
+          <UploadButton
+            endpoint="imageUploader"
+            input={{ folderId: props.currentFolderId }}
+            onClientUploadComplete={() => {
+              navigate.refresh();
+            }}
+          />
 
           <SignInButton />
         </div>

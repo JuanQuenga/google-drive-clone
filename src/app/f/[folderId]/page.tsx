@@ -29,6 +29,7 @@ export default async function FolderPage(props: {
       userInfo={{
         firstName: user.firstName ?? "My Drive",
       }}
+      currentFolderId={parsedFolderId}
     />
   );
 }

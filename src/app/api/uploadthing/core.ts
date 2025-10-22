@@ -1,7 +1,8 @@
 import { withAuth, type UserInfo } from "@workos-inc/authkit-nextjs";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
-import { MUTATIONS } from "~/server/db/queries";
+import z from "zod";
+import { MUTATIONS, QUERIES } from "~/server/db/queries";
 
 const f = createUploadthing();
 
@@ -12,17 +13,31 @@ export const ourFileRouter = {
       maxFileCount: 1,
     },
   })
-    .middleware(async ({ req }) => {
+    .input(
+      z.object({
+        folderId: z.number(),
+      }),
+    )
+    .middleware(async ({ input }) => {
       // This code runs on your server before upload
       const { user } = await withAuth();
 
-      // If you throw, th
-      //\e user will not be able to upload
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
-      if (!user?.id) throw new UploadThingError("Unauthorized");
+      // If you throw, the user will not be able to upload
+      if (!user?.id)
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw new UploadThingError("Unauthorized");
+
+      const folder = await QUERIES.getFolderById(input.folderId);
+
+      if (!folder)
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw new UploadThingError("Folder not found");
+      if (folder.ownerId !== user.id)
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw new UploadThingError("Unauthorized");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId: user.id };
+      return { userId: user.id, folderId: folder.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
@@ -34,7 +49,7 @@ export const ourFileRouter = {
           name: file.name,
           size: file.size,
           url: file.ufsUrl,
-          parent: 1,
+          parent: metadata.folderId,
         },
         userId: parseInt(metadata.userId),
       });
