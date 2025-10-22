@@ -1,11 +1,11 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
-import { FileRow, FolderRow } from "../f/[folderId]/file-row";
+import { FileRow, FolderRow } from "./file-row";
 import type { files_table, folders_table } from "~/server/db/schema";
 import Link from "next/link";
-import { SignInButton } from "./sign-in-button";
-import { UploadButton } from "./uploadthing";
+import { SignInButton } from "../../components/sign-in-button";
+import { UploadButton } from "../../components/uploadthing";
 import { useRouter } from "next/navigation";
 
 export default function DriveContents(props: {

@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import { AuthKitProvider } from "@workos-inc/authkit-nextjs/components";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
+import { PostHogProvider } from "./_providers/posthog-provider";
 
 export const metadata: Metadata = {
   title: "Juan's Drive",
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${geist.variable}`}>
       <body>
-        <AuthKitProvider>{children}</AuthKitProvider>
+        <AuthKitProvider>
+          <PostHogProvider>{children}</PostHogProvider>
+        </AuthKitProvider>
       </body>
     </html>
   );

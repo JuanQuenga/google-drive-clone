@@ -9,7 +9,7 @@ export default async function HomePage() {
 
   // Redirect authenticated users to their drive
   if (user) {
-    redirect("/f/1");
+    redirect("/home");
   }
 
   return (
