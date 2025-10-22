@@ -5,13 +5,13 @@
 - [x] Set up database and data model
 - [x] Move folder open state to URL
 - [x] Add auth
-- [ ] Add file uploading
+- [x] Add file uploading
 - [ ] Add analytics
 
-## 10-22-2026 - Added Auth
+## 10-22-2026 - Added file uploaded
 
-- [ ] Fix uploadthing integration, not receiving onClientUploadComplete callback.
+- [x] Fix uploadthing integration, not receiving onClientUploadComplete callback.
 - [ ] Setup production envirionment for AuthKit via WorkOS dashboard
 - [ ] Update environment variables for Netlify deployment
-- [ ] Check CI
+- [x] Check CI
 - [ ] Added user/email check to auth flow

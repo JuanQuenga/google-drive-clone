@@ -16,7 +16,7 @@ export default function SandboxPage() {
               name: folder.name,
               parent: index !== 0 ? 1 : null,
               createdAt: new Date(),
-              createdBy: 1,
+              ownerId: "root",
             })),
           );
           await db.insert(files_table).values(
@@ -27,7 +27,7 @@ export default function SandboxPage() {
               url: file.url,
               parent: (index % 3) + 1,
               createdAt: new Date(),
-              createdBy: 1,
+              ownerId: "root",
             })),
           );
         }}

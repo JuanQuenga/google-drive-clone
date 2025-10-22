@@ -35,7 +35,6 @@ export const ourFileRouter = {
           size: file.size,
           url: file.ufsUrl,
           parent: 1,
-          createdAt: new Date(),
         },
         userId: parseInt(metadata.userId),
       });

@@ -39,13 +39,7 @@ export default function DriveContents(props: {
               </div>
             ))}
           </div>
-          <UploadButton
-            endpoint="imageUploader"
-            onClientUploadComplete={async () => {
-              console.log("Upload complete");
-              navigate.refresh();
-            }}
-          />
+          <UploadButton endpoint="imageUploader" />
 
           <SignInButton />
         </div>

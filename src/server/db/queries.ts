@@ -50,7 +50,6 @@ export const MUTATIONS = {
       size: number;
       url: string;
       parent: number;
-      createdAt: Date;
     };
     userId: number;
   }) {
@@ -58,7 +57,7 @@ export const MUTATIONS = {
 
     return await db.insert(filesSchema).values({
       ...input.file,
-      createdBy: input.userId,
+      ownerId: input.userId.toString(),
     });
   },
 };

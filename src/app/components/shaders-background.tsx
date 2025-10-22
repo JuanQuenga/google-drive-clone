@@ -1,6 +1,6 @@
 "use client";
 
-import { GrainGradient, SimplexNoise } from "@paper-design/shaders-react";
+import { GrainGradient } from "@paper-design/shaders-react";
 import { useEffect, useState } from "react";
 
 export function ShadersBackground() {

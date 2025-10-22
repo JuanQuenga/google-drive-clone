@@ -1,6 +1,6 @@
 import { authkitMiddleware } from "@workos-inc/authkit-nextjs";
 
-const unauthenticatedPaths = ["/", "/login", "/callback"];
+const unauthenticatedPaths = ["/", "/login", "/callback", "/api/uploadthing"];
 
 export default authkitMiddleware({
   middlewareAuth: {
