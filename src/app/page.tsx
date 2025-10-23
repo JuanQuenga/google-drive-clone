@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { withAuth } from "@workos-inc/authkit-nextjs";
 import { ShadersBackground } from "./components/shaders-background";
 import { SignInButton } from "./components/sign-in-button";
-import { Button } from "~/components/ui/button";
+import { Button } from "~/app/components/ui/button";
 
 export default async function HomePage() {
   const { user } = await withAuth();

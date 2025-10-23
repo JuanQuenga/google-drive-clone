@@ -32,14 +32,16 @@ export const QUERIES = {
     return db
       .select()
       .from(foldersSchema)
-      .where(eq(foldersSchema.parent, folderId));
+      .where(eq(foldersSchema.parent, folderId))
+      .orderBy(foldersSchema.name);
   },
 
   getFiles: function (folderId: number) {
     return db
       .select()
       .from(filesSchema)
-      .where(eq(filesSchema.parent, folderId));
+      .where(eq(filesSchema.parent, folderId))
+      .orderBy(filesSchema.name);
   },
 
   getFolderById: async function (folderId: number) {
@@ -59,6 +61,8 @@ export const MUTATIONS = {
       size: number;
       url: string;
       parent: number;
+      fileKey: string;
+      ownerId: string;
     };
     userId: number;
   }) {
@@ -66,7 +70,7 @@ export const MUTATIONS = {
 
     return await db.insert(filesSchema).values({
       ...input.file,
-      ownerId: input.userId.toString(),
+      ownerId: input.file.ownerId,
     });
   },
 };

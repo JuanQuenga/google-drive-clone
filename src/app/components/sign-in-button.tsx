@@ -4,7 +4,7 @@
  * Example of a client component using the useAuth hook to get the current user session.
  */
 
-import { Button } from "~/components/ui/button";
+import { Button } from "~/app/components/ui/button";
 import { useAuth } from "@workos-inc/authkit-nextjs/components";
 import { handleSignOutAction } from "../actions/signOut";
 

@@ -6,6 +6,10 @@
 - [x] Move folder open state to URL
 - [x] Add auth
 - [x] Add file uploading
-- [ ] Add analytics
-- [ ] Add delete
+- [x] Add analytics
+- [x] Add delete
 - [ ] add real homepage + onboarding
+
+## Fun follow ups
+
+- [ ] Folder Deletions - Make sure you fetch all of the folders that have it as a parent, and their children too.
