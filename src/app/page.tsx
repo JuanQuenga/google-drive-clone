@@ -8,9 +8,7 @@ export default async function HomePage() {
   const { user } = await withAuth();
 
   // Redirect authenticated users to their drive
-  if (user) {
-    redirect("/home");
-  }
+  if (user) redirect("/drive");
 
   return (
     <main className="w-full">
