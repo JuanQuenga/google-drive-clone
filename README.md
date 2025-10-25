@@ -12,7 +12,7 @@
 
 ## Fun follow ups
 
-- [ ] Folder Deletions - Make sure you fetch all of the folders that have it as a parent, and their children too.
+- [x] Folder Deletions - Make sure you fetch all of the folders that have it as a parent, and their children too.
 - [ ] Folder Creations - Make a server action that takes a name and parentId to create a folder. Don't forget to set the ownerId.
 - [ ] Folder Renaming
 - [ ] File Renaming
