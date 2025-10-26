@@ -5,6 +5,11 @@ import RenameFileButton from "~/app/_components/rename-file-button";
 import { Button } from "~/app/_components/ui/button";
 import { deleteFile, deleteFolder } from "~/server/actions";
 import type { files_table, folders_table } from "~/server/db/schema";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "~/app/_components/ui/tooltip";
 
 export function FileRow(props: { file: typeof files_table.$inferSelect }) {
   const { file } = props;
@@ -28,14 +33,19 @@ export function FileRow(props: { file: typeof files_table.$inferSelect }) {
         <div className="col-span-3 text-gray-400">{file.size}</div>
         <div className="col-span-1 flex items-center gap-2 text-gray-400">
           <RenameFileButton fileId={file.id} fileName={file.name} />
-          <Button
-            variant="outline"
-            onClick={() => deleteFile(file.id)}
-            size="icon"
-            aria-label="Delete file"
-          >
-            <Trash2Icon className="h-4 w-4" />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                onClick={() => deleteFile(file.id)}
+                size="icon"
+                aria-label="Delete file"
+              >
+                <Trash2Icon className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Delete file</TooltipContent>
+          </Tooltip>
         </div>
       </div>
     </li>
@@ -65,14 +75,19 @@ export function FolderRow(props: {
         <div className="col-span-3 text-gray-400">--</div>
         <div className="col-span-1 flex items-center gap-2 text-gray-400">
           <RenameFolderButton folderId={folder.id} folderName={folder.name} />
-          <Button
-            onClick={() => deleteFolder(folder.id)}
-            variant="outline"
-            size="icon"
-            aria-label="Delete folder"
-          >
-            <Trash2Icon className="h-4 w-4" />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                onClick={() => deleteFolder(folder.id)}
+                variant="outline"
+                size="icon"
+                aria-label="Delete folder"
+              >
+                <Trash2Icon className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Delete folder</TooltipContent>
+          </Tooltip>
         </div>
       </div>
     </li>
