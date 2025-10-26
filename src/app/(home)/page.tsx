@@ -13,10 +13,10 @@ export default async function HomePage() {
     <>
       <div className="space-y-4 text-center">
         <h1 className="from-foreground to-foreground/70 bg-gradient-to-r bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
-          Personal Drive
+          Your Drive
         </h1>
         <p className="text-foreground/70 mx-auto max-w-2xl text-lg sm:text-xl">
-          My personal drive for storing files.
+          Your personal drive for storing files.
         </p>
       </div>
 
