@@ -94,3 +94,29 @@ export async function deleteFolder(folderId: number) {
 
   return { success: true };
 }
+
+export async function createFolder(parentId: number, formData: FormData) {
+  const { user } = await withAuth();
+  if (!user) return { error: "Unauthorized" };
+
+  const name = formData.get("folderName") as string;
+  if (!name) return { error: "Folder name is required" };
+
+  const parentFolder = await QUERIES.getFolderById(parentId);
+  if (!parentFolder) return { error: "Parent folder not found" };
+  if (parentFolder.ownerId !== user.id) return { error: "Unauthorized" };
+
+  const newFolderId = await db
+    .insert(folders_table)
+    .values({
+      name,
+      parent: parentId,
+      ownerId: user.id,
+    })
+    .$returningId();
+
+  const cookieStore = await cookies();
+  cookieStore.set("force-refresh", JSON.stringify(Math.random()));
+
+  return { success: true, newFolderId: newFolderId[0]!.id };
+}

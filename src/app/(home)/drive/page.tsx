@@ -1,8 +1,7 @@
 import { withAuth } from "@workos-inc/authkit-nextjs";
 import { redirect } from "next/navigation";
 import { MUTATIONS, QUERIES } from "~/server/db/queries";
-import { ShadersBackground } from "../../components/shaders-background";
-import { Button } from "~/app/components/ui/button";
+import { Button } from "~/app/_components/ui/button";
 
 export default async function DrivePage() {
   const { user } = await withAuth();

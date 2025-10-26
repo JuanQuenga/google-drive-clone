@@ -4,9 +4,12 @@ import { ChevronRight } from "lucide-react";
 import { FileRow, FolderRow } from "./file-row";
 import type { files_table, folders_table } from "~/server/db/schema";
 import Link from "next/link";
-import { SignInButton } from "../../components/sign-in-button";
-import { UploadButton } from "../../components/uploadthing";
+import { SignInButton } from "~/app/_components/sign-in-button";
+import { UploadButton } from "~/app/_components/uploadthing";
 import { useRouter } from "next/navigation";
+import { Button } from "~/app/_components/ui/button";
+import { createFolder } from "~/server/actions";
+import NewFolderButton from "~/app/_components/new-folder-button";
 
 export default function DriveContents(props: {
   files: (typeof files_table.$inferSelect)[];
@@ -44,6 +47,7 @@ export default function DriveContents(props: {
               navigate.refresh();
             }}
           />
+          <NewFolderButton currentFolderId={props.currentFolderId} />
 
           <SignInButton />
         </div>

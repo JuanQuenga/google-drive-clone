@@ -1,4 +1,4 @@
-import { ShadersBackground } from "../components/shaders-background";
+import { ShadersBackground } from "~/app/_components/shaders-background";
 
 export default function HomeLayout({
   children,

@@ -13,7 +13,11 @@
 ## Fun follow ups
 
 - [x] Folder Deletions - Make sure you fetch all of the folders that have it as a parent, and their children too.
-- [ ] Folder Creations - Make a server action that takes a name and parentId to create a folder. Don't forget to set the ownerId.
+- [x] Folder Creations - Make a server action that takes a name and parentId to create a folder. Don't forget to set the ownerId.
 - [ ] Folder Renaming
 - [ ] File Renaming
 - [ ] Acceess Control - On the fodler page, add another check that the signed in user matches the folder ownerId.
+
+## TODOS
+
+- [ ] See if the form for folder creation and be moved outside of the client component so it doesn't need a wrapper.
