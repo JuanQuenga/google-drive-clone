@@ -21,6 +21,10 @@ export default function RootLayout({
   return (
     <AuthKitProvider>
       <html lang="en" className={`dark ${geist.variable}`}>
+        <head>
+          <meta name="apple-mobile-web-app-title" content="Drive" />
+        </head>
+
         <body>
           <PostHogProvider>{children}</PostHogProvider>
         </body>
