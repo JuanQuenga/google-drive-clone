@@ -12,22 +12,23 @@ import {
 } from "~/app/_components/ui/dialog";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { createFolder } from "~/server/actions";
-import { useState } from "react";
+import { createFolder, type CreateFolderState } from "~/server/actions";
+import { useActionState, useEffect, useState } from "react";
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { AlertCircleIcon } from "lucide-react";
 
 export default function NewFolderButton({
   currentFolderId,
 }: {
   currentFolderId: number;
 }) {
+  const [state, action, pending] = useActionState(createFolder, {
+    success: false,
+  } as CreateFolderState);
   const [open, setOpen] = useState(false);
-
-  async function handleSubmit(formData: FormData) {
-    const result = await createFolder(currentFolderId, formData);
-    if (result.success) {
-      setOpen(false);
-    }
-  }
+  useEffect(() => {
+    if (state?.success) setOpen(false);
+  }, [state]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -35,7 +36,7 @@ export default function NewFolderButton({
         <Button>New Folder</Button>
       </DialogTrigger>
       <DialogContent>
-        <form action={handleSubmit}>
+        <form action={action}>
           <DialogHeader>
             <DialogTitle>
               What would you like to name your new folder?
@@ -45,20 +46,33 @@ export default function NewFolderButton({
             </DialogDescription>
           </DialogHeader>
 
+          <input type="hidden" name="parentId" value={currentFolderId} />
           <Input
             type="text"
             placeholder="Enter folder name"
             name="folderName"
             defaultValue="New Folder"
-            className="my-4"
+            className="mt-4"
             required
           />
 
-          <DialogFooter>
+          {state.error && (
+            <Alert variant="destructive" className="mt-4">
+              <AlertCircleIcon />
+              <AlertTitle>Unable to create folder</AlertTitle>
+              <AlertDescription>
+                <p>{state.error}</p>
+              </AlertDescription>
+            </Alert>
+          )}
+
+          <DialogFooter className="mt-4">
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit">Create Folder</Button>
+            <Button disabled={pending} type="submit">
+              {pending ? "Creating..." : "Create Folder"}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

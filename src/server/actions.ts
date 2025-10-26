@@ -95,9 +95,20 @@ export async function deleteFolder(folderId: number) {
   return { success: true };
 }
 
-export async function createFolder(parentId: number, formData: FormData) {
+export type CreateFolderState = {
+  error?: string;
+  success?: boolean;
+};
+
+export async function createFolder(
+  prevState: CreateFolderState,
+  formData: FormData,
+) {
   const { user } = await withAuth();
-  if (!user) return { error: "Unauthorized" };
+  if (!user) return { error: "User not found" };
+
+  const parentId = parseInt(formData.get("parentId") as string);
+  if (!parentId) return { error: "Parent folder ID is required" };
 
   const name = formData.get("folderName") as string;
   if (!name) return { error: "Folder name is required" };
@@ -114,9 +125,10 @@ export async function createFolder(parentId: number, formData: FormData) {
       ownerId: user.id,
     })
     .$returningId();
+  if (!newFolderId) return { error: "Failed to create folder" };
 
   const cookieStore = await cookies();
   cookieStore.set("force-refresh", JSON.stringify(Math.random()));
 
-  return { success: true, newFolderId: newFolderId[0]!.id };
+  return { success: true };
 }
