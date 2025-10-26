@@ -1,5 +1,6 @@
 import { FileIcon, Folder as FolderIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
+import RenameFolderButton from "~/app/_components/rename-folder-button";
 import { Button } from "~/app/_components/ui/button";
 import { deleteFile, deleteFolder } from "~/server/actions";
 import type { files_table, folders_table } from "~/server/db/schema";
@@ -60,7 +61,8 @@ export function FolderRow(props: {
         </div>
         <div className="col-span-2 text-gray-400">Folder</div>
         <div className="col-span-3 text-gray-400">--</div>
-        <div className="col-span-1 text-gray-400">
+        <div className="col-span-1 flex items-center gap-2 text-gray-400">
+          <RenameFolderButton folderId={folder.id} folderName={folder.name} />
           <Button
             onClick={() => deleteFolder(folder.id)}
             variant="outline"

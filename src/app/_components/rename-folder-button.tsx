@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -12,19 +11,22 @@ import {
 } from "~/app/_components/ui/dialog";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { createFolder, type CreateFolderState } from "~/server/actions";
+import { renameFolder } from "~/server/actions";
 import { useActionState, useEffect, useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertCircleIcon } from "lucide-react";
+import { AlertCircleIcon, FolderPen } from "lucide-react";
 
-export default function NewFolderButton({
-  currentFolderId,
+export default function RenameFolderButton({
+  folderId,
+  folderName,
 }: {
-  currentFolderId: number;
+  folderId: number;
+  folderName: string;
 }) {
-  const [state, action, pending] = useActionState(createFolder, {
+  const [state, action, pending] = useActionState(renameFolder, {
     success: false,
-  } as CreateFolderState);
+    error: undefined,
+  });
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (state?.success) setOpen(false);
@@ -33,30 +35,29 @@ export default function NewFolderButton({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>New Folder</Button>
+        <Button variant="outline" size="icon">
+          <FolderPen />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <form action={action}>
           <DialogHeader>
             <DialogTitle>
-              What would you like to name your new folder?
+              What would you like to rename the folder to?
             </DialogTitle>
-            <DialogDescription>
-              This is the name that will be displayed in the file explorer.
-            </DialogDescription>
           </DialogHeader>
 
           <input
             type="hidden"
-            name="parentId"
-            value={currentFolderId}
+            name="folderIdToRename"
+            value={folderId}
             required
           />
           <Input
             type="text"
             placeholder="Enter folder name"
-            name="folderName"
-            defaultValue="New Folder"
+            name="newFolderName"
+            defaultValue={folderName}
             className="mt-4"
             required
           />
@@ -64,7 +65,7 @@ export default function NewFolderButton({
           {state.error && (
             <Alert variant="destructive" className="mt-4">
               <AlertCircleIcon />
-              <AlertTitle>Unable to create folder</AlertTitle>
+              <AlertTitle>Unable to rename folder</AlertTitle>
               <AlertDescription>
                 <p>{state.error}</p>
               </AlertDescription>
@@ -76,7 +77,7 @@ export default function NewFolderButton({
               <Button variant="outline">Cancel</Button>
             </DialogClose>
             <Button disabled={pending} type="submit">
-              {pending ? "Creating..." : "Create Folder"}
+              {pending ? "Working..." : "Rename Folder"}
             </Button>
           </DialogFooter>
         </form>

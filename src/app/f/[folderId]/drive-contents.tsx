@@ -25,9 +25,11 @@ export default function DriveContents(props: {
       <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center">
+            {/* User's name */}
             <Link href="/f/1" className="mr-2 text-gray-300 hover:text-white">
-              {userInfo.firstName ?? "My Drive"}
+              {userInfo.firstName ?? "User"}
             </Link>
+            {/* Breadcrumbs */}
             {parents.map((folder) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
@@ -35,7 +37,7 @@ export default function DriveContents(props: {
                   href={`/f/${folder.id}`}
                   className="text-gray-300 hover:text-white"
                 >
-                  {folder.name}
+                  {folder.name === "Root" ? "Drive" : folder.name}
                 </Link>
               </div>
             ))}
