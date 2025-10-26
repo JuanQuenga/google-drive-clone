@@ -7,8 +7,6 @@ import Link from "next/link";
 import { SignInButton } from "~/app/_components/sign-in-button";
 import { UploadButton } from "~/app/_components/uploadthing";
 import { useRouter } from "next/navigation";
-import { Button } from "~/app/_components/ui/button";
-import { createFolder } from "~/server/actions";
 import NewFolderButton from "~/app/_components/new-folder-button";
 
 export default function DriveContents(props: {

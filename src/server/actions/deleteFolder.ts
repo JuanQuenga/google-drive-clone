@@ -49,6 +49,7 @@ export async function deleteFolder(folderId: number) {
     try {
       await utApi.deleteFiles(fileKeys);
     } catch (error) {
+      console.error("Failed to delete files from UploadThing:", error);
       return {
         error: "Failed to delete files from UploadThing",
       };
