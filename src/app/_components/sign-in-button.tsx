@@ -7,11 +7,9 @@
 import { Button } from "~/app/_components/ui/button";
 import { useAuth } from "@workos-inc/authkit-nextjs/components";
 import { handleSignOutAction } from "../actions/signOut";
-import { redirect, usePathname } from "next/navigation";
 
 export function SignInButton({ large }: { large?: boolean }) {
   const { user, loading } = useAuth();
-  const pathname = usePathname();
 
   if (loading) {
     return (
