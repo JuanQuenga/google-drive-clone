@@ -4,7 +4,7 @@ import { MUTATIONS, QUERIES } from "~/server/db/queries";
 import { Button } from "~/app/_components/ui/button";
 
 export default async function DrivePage() {
-  const { user } = await withAuth();
+  const { user } = await withAuth({ ensureSignedIn: true });
   if (!user) return redirect("/login");
 
   const rootFolder = await QUERIES.getRootFolderForUser(user.id);

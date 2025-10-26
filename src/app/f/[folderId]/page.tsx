@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export default async function FolderPage(props: {
   params: Promise<{ folderId: string }>;
 }) {
-  const { user } = await withAuth();
+  const { user } = await withAuth({ ensureSignedIn: true });
   if (!user) return redirect("/");
 
   const params = await props.params;
